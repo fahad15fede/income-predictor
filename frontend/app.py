@@ -170,7 +170,7 @@ if st.button("🚀 Predict Income"):
 
     try:
         response = requests.post(
-            "http://127.0.0.1:8000/predict",
+            "https://fede8rma-income-predict.hf.space/predict",
             json=payload
         )
 
