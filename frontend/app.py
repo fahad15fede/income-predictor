@@ -74,8 +74,10 @@ with col1:
     education = st.selectbox(
         "Education",
         [
-            "Bachelors", "HS-grad", "Masters",
-            "Some-college", "Assoc", "Doctorate"
+            "Bachelors", "Some-college", "11th", "HS-grad",
+            "Prof-school", "Assoc-acdm", "Assoc-voc", "9th",
+            "7th-8th", "12th", "Masters", "1st-4th", "10th",
+            "Doctorate", "5th-6th", "Preschool"
         ]
     )
 
@@ -84,20 +86,18 @@ with col1:
     marital_status = st.selectbox(
         "Marital Status",
         [
-            "Never-married",
-            "Married-civ-spouse",
-            "Divorced",
-            "Separated",
-            "Widowed"
+            "Never-married", "Married-civ-spouse", "Divorced",
+            "Separated", "Widowed", "Married-spouse-absent", "Married-AF-spouse"
         ]
     )
 
     occupation = st.selectbox(
         "Occupation",
         [
-            "Tech-support", "Craft-repair", "Sales",
-            "Exec-managerial", "Prof-specialty",
-            "Machine-op-inspct", "Adm-clerical"
+            "Tech-support", "Craft-repair", "Other-service", "Sales",
+            "Exec-managerial", "Prof-specialty", "Handlers-cleaners",
+            "Machine-op-inspct", "Adm-clerical", "Farming-fishing",
+            "Transport-moving", "Priv-house-serv", "Protective-serv", "Armed-Forces"
         ]
     )
 
@@ -177,9 +177,9 @@ if st.button("🚀 Predict Income"):
         result = response.json()
 
         prediction = result["prediction"]
-        probability = result["probability"]
+        confidence_note = result.get("confidence_note", "")
 
-        if prediction in [">50K", "1"]:
+        if prediction == ">50K":
             msg = "💰 Predicted Income: Above 50K"
         else:
             msg = "📉 Predicted Income: Below 50K"
@@ -187,7 +187,7 @@ if st.button("🚀 Predict Income"):
         st.markdown(f"""
             <div class="prediction-box">
                 <h2>{msg}</h2>
-                <h3>Confidence: {probability}</h3>
+                <p>{confidence_note}</p>
             </div>
         """, unsafe_allow_html=True)
 
