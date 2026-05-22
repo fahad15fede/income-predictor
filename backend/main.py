@@ -3,12 +3,12 @@ from pydantic import BaseModel
 import pickle
 import numpy as np
 import pandas as pd
+import joblib
 
 app = FastAPI()
 
 # Load model
-with open("model.pkl", "rb") as f:
-    model = pickle.load(f)
+model = joblib.load("model.pkl")
 
 # Input schema matching the dataset columns (excluding 'income' target)
 class PredictionInput(BaseModel):
